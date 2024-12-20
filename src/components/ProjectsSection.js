@@ -38,6 +38,7 @@ const ProjectsSection = () => {
       p={8}
       alignItems="flex-start"
       spacing={8}
+      px="10vw"
     >
       <Heading as="h1" id="projects-section">
         Featured Projects
