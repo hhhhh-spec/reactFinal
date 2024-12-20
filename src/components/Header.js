@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -44,8 +44,28 @@ const Header = () => {
     }
   };
 
+  const [lastScrollY, setLastScrollY] = useState(0); 
+  const boxRef = useRef(null);
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY; 
+      if (currentScrollY > lastScrollY) {
+        boxRef.current.style.transform = 'translateY(-200px)'; 
+      } else if (currentScrollY < lastScrollY) {
+        boxRef.current.style.transform = 'translateY(0)'; 
+      }
+      setLastScrollY(currentScrollY);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY]);  
+
+
   return (
     <Box
+      ref={boxRef}
       position="fixed"
       top={0}
       left={0}
