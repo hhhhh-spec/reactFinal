@@ -2,7 +2,7 @@ import React from "react";
 import { Avatar, Heading, VStack } from "@chakra-ui/react";
 import FullScreenSection from "./FullScreenSection";
 
-const greeting = "Hello, I am HSH!";
+const greeting = "Hello, I am Hana!";
 const bio1 = "A frontend developer";
 const bio2 = "specialised in React";
 
@@ -15,11 +15,11 @@ const LandingSection = () => (
     isDarkBackground
     backgroundColor="#2A4365"
   >
-    <VStack>
-      <Avatar  src={require("../images/9.jpg")}/>
-      <p>{greeting}</p>
-      <Heading>{bio1}</Heading>
-      <Heading>{bio2}</Heading>
+    <VStack gap={4}>
+      <Avatar size="lg" src={require("../images/9.jpg")}/>
+      <Heading size="md">{greeting}</Heading>
+      <Heading size="xl">{bio1}</Heading>
+      <Heading size="xl">{bio2}</Heading>
     </VStack>
 
   </FullScreenSection>

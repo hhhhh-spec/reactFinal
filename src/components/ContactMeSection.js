@@ -29,14 +29,15 @@ const ContactMeSection = () => {
       comment: "",
     },
     onSubmit: (values) =>{
-      submit('https://example.com/api/submit-form', values);
+      submit("", values);
       onOpen(response.type, response.message);
       response.type === 'success' && formik.resetForm();
     },
     validationSchema: Yup.object({
       firstName: Yup.string().required("Required"),
       email: Yup.string().email("Invalid email address").required("Required"),
-      comment: Yup.string().required("Required"),
+      type: Yup.string().required("Required").optional(),
+      comment: Yup.string().required("Required").min(25, "Must be at least 25 characters"),
   }),
 });
 
@@ -66,7 +67,7 @@ const ContactMeSection = () => {
                   name="firstName"
                   {...formik.getFieldProps("firstName")}
                 />
-                <FormErrorMessage>{formik.touched.firstName && formik.errors.firstName ? formik.errors.firstName : ""}</FormErrorMessage>
+                <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={formik.touched.email && formik.errors.email}>
                 <FormLabel htmlFor="email">Email Address</FormLabel>
@@ -76,7 +77,7 @@ const ContactMeSection = () => {
                   type="email"
                   {...formik.getFieldProps("email")}
                 />
-                <FormErrorMessage>{formik.touched.email && formik.errors.email ? formik.errors.email : ""}</FormErrorMessage>
+                <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
               </FormControl>
               <FormControl>
                 <FormLabel htmlFor="type">Type of enquiry</FormLabel>
@@ -96,10 +97,10 @@ const ContactMeSection = () => {
                   height={250}
                   {...formik.getFieldProps("comment")}
                 />
-                <FormErrorMessage>{formik.touched.comment && formik.errors.comment ? formik.errors.comment : ""}</FormErrorMessage>
+                <FormErrorMessage>{formik.errors.comment}</FormErrorMessage>
               </FormControl>
-              <Button type="submit" colorScheme="purple" width="full" disabled={isLoading}>
-                {isLoading ? "Submitting..." : "Submit"}
+              <Button type="submit" colorScheme="purple" width="full" isLoading={isLoading}>
+                Submit
               </Button>
             </VStack>
           </form>
